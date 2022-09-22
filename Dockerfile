@@ -48,6 +48,7 @@ RUN set -ex; \
         curl \
         gnupg \
         sudo \
+        ca-certificates \
         apt-transport-https; \
     curl https://baltocdn.com/helm/signing.asc \
     | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > \
