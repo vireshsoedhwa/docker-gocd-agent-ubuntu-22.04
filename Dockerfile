@@ -46,16 +46,11 @@ ARG GID=1000
 RUN set -ex; \
     apt-get update && apt-get install -y --no-install-recommends \
         curl \
-        gnupg \
         sudo \
         ca-certificates \
         apt-transport-https; \
-    curl https://baltocdn.com/helm/signing.asc \
-    | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > \
-    /dev/null; \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list; \
-    apt-get update; \
-    apt-get install helm;
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -; \
+    sudo apt-get install -y nodejs; 
 ####### END OF CUSTOM ##########
 
 RUN \
