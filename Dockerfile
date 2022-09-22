@@ -42,6 +42,21 @@ ENV GO_JAVA_HOME="/gocd-jre"
 ARG UID=1000
 ARG GID=1000
 
+####### CUSTOM ##########
+RUN set -ex; \
+    apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        gnupg \
+        sudo \
+        apt-transport-https; \
+    curl https://baltocdn.com/helm/signing.asc \
+    | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > \
+    /dev/null; \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list; \
+    apt-get update; \
+    apt-get install helm;
+####### END OF CUSTOM ##########
+
 RUN \
 # add mode and permissions for files we added above
   chmod 0755 /usr/local/sbin/tini && \
