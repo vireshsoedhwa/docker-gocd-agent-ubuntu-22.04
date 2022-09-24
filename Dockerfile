@@ -48,6 +48,7 @@ RUN set -ex; \
         curl \
         gnupg \
         sudo \
+        jq \
         ca-certificates \
         apt-transport-https; \
     curl https://baltocdn.com/helm/signing.asc \
